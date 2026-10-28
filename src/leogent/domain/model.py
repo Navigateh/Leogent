@@ -23,6 +23,7 @@ class Message(DomainModel):
     content: str | None = None
     name: str | None = None
     tool_call_id: str | None = None
+    tool_calls: tuple[ToolCall, ...] = ()
 
     @model_validator(mode="after")
     def validate_tool_fields(self) -> Self:
@@ -30,6 +31,8 @@ class Message(DomainModel):
             raise ValueError("tool messages require tool_call_id")
         if self.role is not MessageRole.TOOL and self.tool_call_id is not None:
             raise ValueError("tool_call_id is only valid for tool messages")
+        if self.tool_calls and self.role is not MessageRole.ASSISTANT:
+            raise ValueError("tool_calls are only valid for assistant messages")
         return self
 
 
@@ -37,6 +40,7 @@ class ModelRequest(DomainModel):
     messages: tuple[Message, ...] = Field(min_length=1)
     tools: tuple[ToolDefinition, ...] = ()
     parameters: GenerationParameters = Field(default_factory=GenerationParameters)
+    estimated_input_tokens: int = Field(default=0, ge=0)
     metadata: dict[str, JsonValue] = Field(default_factory=dict)
 
 

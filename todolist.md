@@ -42,16 +42,16 @@
 
 ## Milestone 2：Provider 与单轮请求
 
-- [ ] 定义 `ModelProvider`、流式 chunk 和 `ModelCapabilities` 协议。
-- [ ] 实现 OpenAI-compatible Provider 的非流式请求。
-- [ ] 实现 OpenAI-compatible Provider 的流式请求。
-- [ ] 实现 native tool call 与文本内容的响应归一化。
-- [ ] 实现 Anthropic 原生 Provider 的消息和工具调用。
-- [ ] 实现脚本化 `MockProvider`，支持预定义响应和请求录制。
-- [ ] 添加上下文窗口、输出长度、temperature 和 top-p 校验。
-- [ ] 实现 `leogent run --no-tui` 的单轮模型回答。
-- [ ] 使用 MockProvider 完成请求转换、usage 和错误路径测试。
-- [ ] 使用真实云服务完成一次手动验收，并将测试标记为 `live`。
+- [x] 定义 `ModelProvider`、流式 chunk 和 `ModelCapabilities` 协议。
+- [x] 实现 OpenAI-compatible Provider 的非流式请求。
+- [x] 实现 OpenAI-compatible Provider 的流式请求。
+- [x] 实现 native tool call 与文本内容的响应归一化。
+- [x] 实现 Anthropic 原生 Provider 的消息和工具调用。
+- [x] 实现脚本化 `MockProvider`，支持预定义响应和请求录制。
+- [x] 添加上下文窗口、输出长度、temperature 和 top-p 校验。
+- [x] 实现 `leogent run --no-tui` 的单轮模型回答。
+- [x] 使用 MockProvider 完成请求转换、usage 和错误路径测试。
+- [ ] 使用真实云服务完成一次手动验收；live 测试入口已添加，但当前未执行真实 API 调用。
 
 ## Milestone 3：Session 与事件
 

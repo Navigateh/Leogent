@@ -10,3 +10,22 @@ class LeogentError(Exception):
 
 class ConfigurationError(LeogentError):
     code = ErrorCode.CONFIGURATION
+
+
+class ContextWindowExceeded(LeogentError):
+    code = ErrorCode.VALIDATION
+
+
+class ProviderError(LeogentError):
+    code = ErrorCode.PROVIDER
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        retryable: bool = False,
+        status_code: int | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.retryable = retryable
+        self.status_code = status_code

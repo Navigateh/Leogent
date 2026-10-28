@@ -1,7 +1,7 @@
 # Leogent Architecture
 
 This document describes the architecture currently implemented by Milestones 0
-and 1. Later milestones add behavior behind the interfaces described here.
+through 2. Later milestones add behavior behind the interfaces described here.
 
 ## Package Layers
 
@@ -12,6 +12,11 @@ CLI
  │    ├── models
  │    ├── paths
  │    └── loader
+ │
+ ├── providers
+ │    ├── OpenAI-compatible
+ │    ├── Anthropic
+ │    └── scripted mock
  │
  └── domain
       ├── model and actions
@@ -26,7 +31,7 @@ immutable Pydantic models with strict field validation.
 
 ## Domain Boundaries
 
-The implemented domain models cover:
+The implemented domain models and provider boundary cover:
 
 - Messages, generation parameters, model requests, model responses, and usage.
 - Tool definitions, tool calls, and normalized tool results.
@@ -34,9 +39,12 @@ The implemented domain models cover:
   finishing a run.
 - Session events, Session metadata, and reconstructed run state.
 - Long-term memory items, Skill descriptors, and context plans.
+- Normalized provider capabilities, streaming chunks, and request validation.
+- OpenAI-compatible and Anthropic request/response conversion.
 
-These are contracts only. They do not perform I/O, call a model, or execute a
-tool.
+The domain contracts do not perform I/O. Provider adapters translate HTTP
+requests and streaming events into the contracts but do not execute tools or
+run an Agent Loop.
 
 ## Configuration Flow
 
@@ -58,6 +66,12 @@ invalid input values.
 
 ## Runtime Direction
 
+Milestone 2 connects model I/O through:
+
+```text
+CLI run -> Provider factory -> ModelProvider -> ModelResponse/ModelChunk
+```
+
 Future milestones connect these contracts through:
 
 ```text
@@ -72,6 +86,6 @@ per-request projection constructed by policy.
 
 ## Current Non-Goals
 
-Milestones 0 and 1 do not implement providers, the Agent Loop, sessions storage,
-MCP, memory storage or retrieval, context compaction, Skill loading, or TUI
+Milestones 0 through 2 do not implement the Agent Loop, session storage, MCP,
+memory storage or retrieval, context compaction, Skill loading, or TUI
 rendering. They also provide no sandbox or permission boundary.

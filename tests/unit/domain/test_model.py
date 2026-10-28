@@ -1,7 +1,14 @@
 import pytest
 from pydantic import ValidationError
 
-from leogent.domain.model import Message, MessageRole, ModelRequest, ModelResponse, ToolDefinition
+from leogent.domain.model import (
+    Message,
+    MessageRole,
+    ModelRequest,
+    ModelResponse,
+    ToolCall,
+    ToolDefinition,
+)
 
 
 def test_model_response_round_trip_preserves_tool_call_arguments() -> None:
@@ -32,6 +39,21 @@ def test_message_rejects_invalid_role() -> None:
 def test_tool_message_requires_tool_call_id() -> None:
     with pytest.raises(ValidationError):
         Message(role=MessageRole.TOOL, content="result")
+
+
+def test_only_assistant_messages_can_contain_tool_calls() -> None:
+    with pytest.raises(ValidationError):
+        Message(
+            role=MessageRole.USER,
+            content="hello",
+            tool_calls=(
+                ToolCall(
+                    id="call_1",
+                    name="filesystem__read_file",
+                    arguments={"path": "README.md"},
+                ),
+            ),
+        )
 
 
 def test_model_request_round_trip_preserves_tool_definition() -> None:

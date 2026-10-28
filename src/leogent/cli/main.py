@@ -1,6 +1,7 @@
 import typer
 
 from leogent import __version__
+from leogent.cli.run import register as register_run
 
 app = typer.Typer(
     name="leogent",
@@ -18,6 +19,9 @@ def root() -> None:
 def version() -> None:
     """Print the installed Leogent version."""
     typer.echo(__version__)
+
+
+register_run(app)
 
 
 def main() -> None:
