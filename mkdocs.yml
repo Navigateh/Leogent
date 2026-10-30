@@ -37,6 +37,7 @@ nav:
   - 首页: index.md
   - 教程:
       - 学习路线: tutorials/index.md
+      - Milestone 1 · 领域模型与配置: tutorials/milestone-1.md
       - Milestone 2 · Model Provider: tutorials/milestone-2.md
   - 架构: architecture.md
   - 设计:
