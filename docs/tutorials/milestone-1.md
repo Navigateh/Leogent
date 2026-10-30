@@ -1,9 +1,5 @@
 # Milestone 1 · 领域模型与配置
 
-> 本章对应 Leogent `cd6f300b41fbd884595070376d3357d142b9bfa3`。
-> Hermes 对照固定在
-> `088f657ecf77674c7b8e2ededf4e3576d82e042c`，不会跟随 `main` 漂移。
-
 Milestone 0 建立了 Python 包、测试入口和 CLI 骨架。Milestone 1 开始建立
 Agent 内部真正共享的语言：消息如何表示，模型如何返回工具调用，一次运行如何
 记录状态，配置从哪里加载，以及密钥为什么只能通过引用出现。
