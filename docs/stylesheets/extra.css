@@ -1,0 +1,115 @@
+:root {
+  --md-primary-fg-color: #0f766e;
+  --md-primary-fg-color--light: #14b8a6;
+  --md-primary-fg-color--dark: #115e59;
+  --md-accent-fg-color: #d97706;
+  --leogent-surface: #f8fafc;
+  --leogent-border: rgba(15, 118, 110, 0.16);
+  --leogent-muted: #64748b;
+  --leogent-code: #0f172a;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2dd4bf;
+  --md-primary-fg-color--light: #5eead4;
+  --md-primary-fg-color--dark: #14b8a6;
+  --md-accent-fg-color: #fbbf24;
+  --leogent-surface: #111a22;
+  --leogent-border: rgba(45, 212, 191, 0.18);
+  --leogent-muted: #94a3b8;
+  --leogent-code: #030712;
+}
+
+body {
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.md-typeset h1,
+.md-typeset h2 {
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.md-typeset h2 {
+  border-bottom: 1px solid var(--leogent-border);
+  padding-bottom: 0.45rem;
+}
+
+.md-typeset code {
+  border-radius: 0.3rem;
+}
+
+.md-typeset pre > code {
+  border-radius: 0.65rem;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--leogent-border);
+  border-radius: 0.65rem;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 0.65rem;
+}
+
+.md-typeset .mermaid {
+  background: var(--leogent-surface);
+  border: 1px solid var(--leogent-border);
+  border-radius: 0.8rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  text-align: center;
+}
+
+.leogent-hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(251, 191, 36, 0.18), transparent 28%),
+    linear-gradient(135deg, rgba(20, 184, 166, 0.12), rgba(15, 118, 110, 0.03));
+  border: 1px solid var(--leogent-border);
+  border-radius: 1rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 112px minmax(0, 1fr);
+  margin: 1.2rem 0 2.2rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.leogent-hero__mark {
+  filter: drop-shadow(0 12px 28px rgba(15, 118, 110, 0.24));
+  width: 112px;
+}
+
+.leogent-hero h1 {
+  font-size: clamp(2.3rem, 6vw, 4rem);
+  margin: 0;
+}
+
+.leogent-hero p {
+  color: var(--leogent-muted);
+  font-size: 1.05rem;
+  margin: 0.65rem 0 1.2rem;
+  max-width: 42rem;
+}
+
+.leogent-kicker {
+  color: var(--md-primary-fg-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  .leogent-hero {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .leogent-hero__mark {
+    width: 82px;
+  }
+}

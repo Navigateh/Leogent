@@ -15,9 +15,10 @@ jobs:
         with:
           enable-cache: true
           python-version: "3.11"
-      - run: uv sync --extra dev --locked
+      - run: uv sync --extra dev --extra docs --locked
       - run: uv run ruff format --check .
       - run: uv run ruff check .
       - run: uv run pyright
       - run: uv run pytest -q
+      - run: uv run mkdocs build --strict
       - run: uv run python -m build

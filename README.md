@@ -44,6 +44,18 @@ uv run pytest -q
 uv run python -m build
 ```
 
+## Documentation
+
+The tutorial site uses MkDocs Material:
+
+```bash
+uv sync --extra docs
+uv run mkdocs serve
+uv run mkdocs build --strict
+```
+
+Open `http://127.0.0.1:8000` after starting the development server.
+
 ## Configuration
 
 Leogent reads a global JSON configuration and may override it with

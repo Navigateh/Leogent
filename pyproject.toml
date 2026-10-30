@@ -38,6 +38,11 @@ dev = [
   "pytest-cov>=5,<7",
   "ruff>=0.8,<1",
 ]
+docs = [
+  "mkdocs>=1.6,<2",
+  "mkdocs-material>=9.6,<10",
+  "pymdown-extensions>=10.14,<11",
+]
 local = [
   "torch>=2.4",
   "transformers>=4.44,<5",

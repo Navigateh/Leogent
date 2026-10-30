@@ -1,0 +1,88 @@
+site_name: Leogent
+site_description: A small agent runtime you can read, run, and reshape.
+repo_url: https://github.com/Navigateh/Leogent
+repo_name: Navigateh/Leogent
+docs_dir: docs
+site_dir: site
+strict: true
+
+theme:
+  name: material
+  language: zh
+  logo: assets/leogent-mark.svg
+  favicon: assets/leogent-mark.svg
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到浅色模式
+
+nav:
+  - 首页: index.md
+  - 教程:
+      - 学习路线: tutorials/index.md
+      - Milestone 2 · Model Provider: tutorials/milestone-2.md
+  - 架构: architecture.md
+  - 设计:
+      - Phase 1: superpowers/specs/2026-10-28-leogent-phase1-design.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path:
+        - .
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Navigateh/Leogent
+      name: Leogent on GitHub
+
+copyright: Copyright &copy; 2026 Navigateh
