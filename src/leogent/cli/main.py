@@ -2,6 +2,7 @@ import typer
 
 from leogent import __version__
 from leogent.cli.run import register as register_run
+from leogent.cli.sessions import register as register_sessions
 
 app = typer.Typer(
     name="leogent",
@@ -22,6 +23,7 @@ def version() -> None:
 
 
 register_run(app)
+register_sessions(app)
 
 
 def main() -> None:

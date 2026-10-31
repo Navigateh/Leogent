@@ -55,16 +55,16 @@
 
 ## Milestone 3：Session 与事件
 
-- [ ] 实现 SQLite schema、版本表和初始化逻辑。
-- [ ] 实现 append-only EventStore。
-- [ ] 实现 Session 创建、查询和状态更新。
-- [ ] 实现从事件重建 RunState。
-- [ ] 实现 `sessions list` 和 `sessions show`。
-- [ ] 实现 `resume`，恢复后继续同一 Session。
-- [ ] 实现 `fork`，从指定事件创建独立 Session。
-- [ ] 确保工具事件与相关 Session 元数据更新在同一事务中提交。
-- [ ] 添加进程异常中断后的恢复测试。
-- [ ] 添加事件顺序、重复写入和 schema 迁移测试。
+- [x] 实现 SQLite schema、版本表和初始化逻辑。
+- [x] 实现 append-only EventStore。
+- [x] 实现 Session 创建、查询和状态更新。
+- [x] 实现从事件重建 RunState。
+- [x] 实现 `sessions list` 和 `sessions show`。
+- [x] 实现 `resume`，恢复后继续同一 Session。
+- [x] 实现 `fork`，从指定事件创建独立 Session。
+- [x] 确保工具事件与相关 Session 元数据更新在同一事务中提交。
+- [x] 添加进程异常中断后的恢复测试。
+- [x] 添加事件顺序、重复写入和 schema 迁移测试。
 
 ## Milestone 4：MCP 与 Action 执行
 

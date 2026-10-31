@@ -10,7 +10,7 @@
 | 0 | 仓库基础与 CLI | 代码完成 | 待编写 |
 | 1 | 领域模型与配置 | 代码完成 | [打开章节](milestone-1.md) |
 | 2 | Model Provider | 代码完成 | [打开章节](milestone-2.md) |
-| 3 | Session 与事件 | 待实现 | 待编写 |
+| 3 | Session 与事件 | 代码完成 | [打开章节](milestone-3.md) |
 | 4 | MCP 与 Action | 待实现 | 待编写 |
 | 5 | ReAct Runtime | 待实现 | 待编写 |
 | 6 | ContextBuilder 与压缩 | 待实现 | 待编写 |

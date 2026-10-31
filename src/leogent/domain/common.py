@@ -14,7 +14,14 @@ def utc_now() -> datetime:
     return datetime.now(tz=UTC)
 
 
-def normalize_datetime(value: datetime) -> datetime:
+def normalize_datetime(value: object) -> datetime:
+    if isinstance(value, str):
+        try:
+            value = datetime.fromisoformat(value)
+        except ValueError as error:
+            raise ValueError("datetime must be an ISO 8601 value") from error
+    if not isinstance(value, datetime):
+        raise ValueError("datetime value is required")
     if value.tzinfo is None or value.utcoffset() is None:
         return value.replace(tzinfo=UTC)
     return value.astimezone(UTC)

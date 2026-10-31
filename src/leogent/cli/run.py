@@ -8,6 +8,8 @@ from leogent.domain.errors import LeogentError
 from leogent.domain.model import Message, MessageRole, ModelRequest
 from leogent.providers.base import ModelProvider
 from leogent.providers.factory import create_provider
+from leogent.sessions.runner import execute_turn
+from leogent.sessions.sqlite import SQLiteSessionStore, default_database_path
 
 
 def run_once(provider: ModelProvider, prompt: str, *, stream: bool = False) -> str:
@@ -66,13 +68,32 @@ def register(app: typer.Typer) -> None:
         if not prompt.strip():
             raise typer.BadParameter("prompt must not be empty")
         provider: ModelProvider | None = None
+        store: SQLiteSessionStore | None = None
         try:
             config = load_config_from_search(Path.cwd())
             provider = create_provider(config, provider_name=provider_name)
-            run_once(provider, prompt, stream=stream)
+            store = SQLiteSessionStore(default_database_path())
+            result = execute_turn(
+                store,
+                provider,
+                prompt,
+                stream=stream,
+                on_text=lambda text: typer.echo(text, nl=False),
+            )
+            if result.text:
+                typer.echo()
+            if result.response.tool_calls:
+                names = ", ".join(call.name for call in result.response.tool_calls)
+                typer.echo(
+                    f"Model requested tool calls ({names}); tool execution starts in Milestone 4.",
+                    err=True,
+                )
+            typer.echo(f"session {result.session.id}", err=True)
         except LeogentError as error:
             typer.echo(f"Error: {error}", err=True)
             raise typer.Exit(1) from None
         finally:
+            if store is not None:
+                store.close()
             if provider is not None:
                 provider.close()

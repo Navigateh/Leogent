@@ -12,6 +12,18 @@ class ConfigurationError(LeogentError):
     code = ErrorCode.CONFIGURATION
 
 
+class SessionError(LeogentError):
+    code = ErrorCode.SESSION
+
+
+class SessionNotFound(SessionError):
+    pass
+
+
+class DuplicateEvent(SessionError):
+    pass
+
+
 class ContextWindowExceeded(LeogentError):
     code = ErrorCode.VALIDATION
 

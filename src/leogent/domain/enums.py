@@ -63,6 +63,7 @@ class ContextSource(StrEnum):
 
 class ErrorCode(StrEnum):
     CONFIGURATION = "configuration"
+    SESSION = "session"
     VALIDATION = "validation"
     PROVIDER = "provider"
     TOOL = "tool"

@@ -26,7 +26,9 @@ def _config() -> AppConfig:
 
 def test_run_command_prints_single_turn_non_stream_response(
     monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
+    monkeypatch.setenv("LEOGENT_HOME", str(tmp_path))
     provider = ScriptedProvider((ModelResponse(content="Hello from Leogent"),))
 
     def fake_load(_: Path) -> AppConfig:
@@ -53,7 +55,11 @@ def test_run_command_prints_single_turn_non_stream_response(
     assert provider.requests[0].messages[0].content == "Say hello"
 
 
-def test_run_command_streams_text(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_run_command_streams_text(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    monkeypatch.setenv("LEOGENT_HOME", str(tmp_path))
     provider = ScriptedProvider((ModelResponse(content="Hello stream"),))
 
     def fake_load(_: Path) -> AppConfig:
@@ -93,7 +99,9 @@ def test_run_command_rejects_empty_prompt(monkeypatch: pytest.MonkeyPatch) -> No
 
 def test_run_command_accepts_explicit_provider(
     monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
 ) -> None:
+    monkeypatch.setenv("LEOGENT_HOME", str(tmp_path))
     provider = ScriptedProvider((ModelResponse(content="ok"),))
     observed: dict[str, object] = {}
 

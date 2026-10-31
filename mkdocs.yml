@@ -39,6 +39,7 @@ nav:
       - 学习路线: tutorials/index.md
       - Milestone 1 · 领域模型与配置: tutorials/milestone-1.md
       - Milestone 2 · Model Provider: tutorials/milestone-2.md
+      - Milestone 3 · Session 与事件: tutorials/milestone-3.md
   - 架构: architecture.md
   - 设计:
       - Phase 1: superpowers/specs/2026-10-28-leogent-phase1-design.md

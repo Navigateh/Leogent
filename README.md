@@ -7,10 +7,10 @@ first stage focuses on a complete, readable execution path from a model request
 through tools, session state, memory, context compaction, and skills. The second
 stage will grow the same runtime into a practical coding agent.
 
-Milestones 0 through 2 currently provide repository foundations, domain models,
+Milestones 0 through 3 currently provide repository foundations, domain models,
 layered configuration, OpenAI-compatible and Anthropic providers, streaming
-responses, and the single-turn `leogent run --no-tui` command. MCP tools, the
-Agent Loop, sessions, memory storage, compaction, and TUI behavior remain future
+responses, append-only SQLite sessions, and the single-turn CLI. MCP tools, the
+Agent Loop, memory storage, compaction, and TUI behavior remain future
 milestones.
 
 > [!WARNING]
@@ -41,6 +41,7 @@ uv run ruff format --check .
 uv run ruff check .
 uv run pyright
 uv run pytest -q
+uv run mkdocs build --strict
 uv run python -m build
 ```
 
@@ -102,6 +103,21 @@ uv run pytest -m live tests/integration/test_live_provider.py -v
 Read the detailed [Milestone 2 provider tutorial](docs/tutorials/milestone-2.md)
 for the request/response code path, streaming parser, Anthropic content blocks,
 and CLI wiring.
+
+## Sessions
+
+Every `run` creates an append-only SQLite event log under the user data
+directory. The database path can be rooted with `LEOGENT_HOME`.
+
+```bash
+leogent sessions list
+leogent sessions show <session-id>
+leogent resume <session-id> "Continue the task"
+leogent sessions fork <session-id> --at 4
+```
+
+`resume` without a prompt prints the persisted Session and its events. A fork
+copies an event prefix into a new Session with independent event IDs.
 
 ## License
 

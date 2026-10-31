@@ -1,7 +1,7 @@
 # Leogent Architecture
 
 This document describes the architecture currently implemented by Milestones 0
-through 2. Later milestones add behavior behind the interfaces described here.
+through 3. Later milestones add behavior behind the interfaces described here.
 
 ## Package Layers
 
@@ -17,6 +17,11 @@ CLI
  │    ├── OpenAI-compatible
  │    ├── Anthropic
  │    └── scripted mock
+ │
+ ├── sessions
+ │    ├── SQLite migrations
+ │    ├── append-only event store
+ │    └── single-turn runner
  │
  └── domain
       ├── model and actions
@@ -66,10 +71,14 @@ invalid input values.
 
 ## Runtime Direction
 
-Milestone 2 connects model I/O through:
+Milestones 2 and 3 connect persisted model I/O through:
 
 ```text
-CLI run -> Provider factory -> ModelProvider -> ModelResponse/ModelChunk
+CLI run/resume
+  -> SessionStore (create or restore)
+  -> Provider factory -> ModelProvider
+  -> append model response
+  -> SessionStore (rebuild state, list, show, fork)
 ```
 
 Future milestones connect these contracts through:
@@ -81,11 +90,11 @@ Session events -> ContextBuilder -> ModelProvider
                                -> Session events
 ```
 
-The event log will be the source of truth. The model context will remain a
-per-request projection constructed by policy.
+The event log is the source of truth for Session recovery. The model context
+will remain a per-request projection constructed by policy.
 
 ## Current Non-Goals
 
-Milestones 0 through 2 do not implement the Agent Loop, session storage, MCP,
-memory storage or retrieval, context compaction, Skill loading, or TUI
-rendering. They also provide no sandbox or permission boundary.
+Milestones 0 through 3 do not implement the Agent Loop, MCP, memory storage or
+retrieval, context compaction, Skill loading, or TUI rendering. They also provide
+no sandbox or permission boundary.
